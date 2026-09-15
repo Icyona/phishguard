@@ -484,6 +484,25 @@ else {
             data.confidence + "%";
         let reasons = [];
 
+        // Display extracted URL features
+document.getElementById("urlLength").innerText =
+    data.features.url_length;
+
+document.getElementById("httpsStatus").innerText =
+    data.features.https === 1 ? "Secure" : "Not Secure";
+
+document.getElementById("subdomains").innerText =
+    data.features.subdomains;
+
+document.getElementById("suspiciousWords").innerText =
+    data.features.suspicious_words;
+
+document.getElementById("ipAddress").innerText =
+    data.features.ip_address === 1 ? "Detected" : "Not Detected";
+
+document.getElementById("atSymbol").innerText =
+    data.features.at_symbol === 1 ? "Detected" : "Not Detected";
+
 if (data.features.suspicious_words > 0) {
     reasons.push(
         data.features.suspicious_words +
