@@ -6,11 +6,14 @@ import re
 from urllib.parse import urlparse
 
 app = Flask(__name__)
+CORS(app)
 
-# Allow the frontend to communicate with the API
-CORS(app, resources={
-    r"/predict": {"origins": "*"}
-})
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "https://phishguard-web-n2bk.onrender.com"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    return response
 
 # Load trained model
 model = joblib.load("phishing_model.pkl")
@@ -69,9 +72,12 @@ def home():
     })
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST,"OPTIONS"])
 def predict():
 
+if request.method == "OPTIONS":
+    return "", 204
+    
     data = request.get_json()
 
     if not data or "url" not in data:
