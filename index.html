@@ -482,9 +482,7 @@ else {
 
         document.getElementById("confidence").innerText =
             data.confidence + "%";
-        let reasons = [];
-
-        // Display extracted URL features
+// Display extracted URL features
 document.getElementById("urlLength").innerText =
     data.features.url_length;
 
@@ -502,13 +500,8 @@ document.getElementById("ipAddress").innerText =
 
 document.getElementById("atSymbol").innerText =
     data.features.at_symbol === 1 ? "Detected" : "Not Detected";
-
-if (data.features.suspicious_words > 0) {
-    reasons.push(
-        data.features.suspicious_words +
-        " suspicious keyword(s) detected"
-    );
-}
+        
+        let reasons = [];
 
 if (data.features.ip_address === 1) {
     reasons.push("The URL uses an IP address instead of a domain name");
