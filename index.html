@@ -1,1 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #0b1020;
+    color: white;
+}
+
+.app {
+    max-width: 900px;
+    margin: auto;
+    min-height: 600px;
+    padding: 35px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #6c63ff;
+}
+
+.badge {
+    background: #171d32;
+    padding: 8px 14px;
+    border-radius: 20px;
+    color: #aab2d5;
+    font-size: 12px;
+}
+
+.hero {
+    text-align: center;
+}
+
+.icon {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    border-radius: 22px;
+    background: #171d32;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+h1 {
+    font-size: 42px;
+    margin: 25px 0 12px;
+}
+
+.subtitle {
+    color: #9ca5c7;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: auto;
+}
+
+.input-area {
+    margin: 40px auto 20px;
+    max-width: 650px;
+    display: flex;
+    background: #151b30;
+    border: 1px solid #2c3554;
+    border-radius: 14px;
+    padding: 7px;
+}
+
+input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 15px;
+    padding: 15px;
+}
+
+button {
+    border: none;
+    background: #6c63ff;
+    color: white;
+    padding: 0 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #8179ff;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 35px;
+    color: #8992b5;
+    font-size: 13px;
+}
+
+.feature {
+    background: #11172a;
+    padding: 12px 18px;
+    border-radius: 10px;
+}
+
+#result {
+    display: none;
+    text-align: center;
+}
+
+.result-card {
+    max-width: 650px;
+    margin: auto;
+    background: #151b30;
+    border: 1px solid #2c3554;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.result-icon {
+    font-size: 55px;
+}
+
+.result-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 15px;
+}
+
+.risk {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 20px;
+    background: #3b1720;
+    color: #ff7187;
+    font-weight: bold;
+}
+
+.result-card.safe {
+    border-color: #245c3a;
+}
+
+.result-card.safe .risk {
+    background: #123b26;
+    color: #5ee59a;
+}
+
+.result-card.safe .result-title {
+    color: #5ee59a;
+}
+
+.result-card.danger {
+    border-color: #6b2635;
+}
+
+.result-card.danger .risk {
+    background: #3b1720;
+    color: #ff7187;
+}
+
+.result-card.danger .result-title {
+    color: #ff7187;
+}
+
+.result-card.warning {
+    border-color: #66551f;
+}
+
+.result-card.warning .risk {
+    background: #3d3515;
+    color: #f5d76e;
+}
+
+.result-card.warning .result-title {
+    color: #f5d76e;
+}
+
+.details {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.explanation {
+    margin-top: 25px;
+    padding: 18px;
+    background: #11172a;
+    border-radius: 12px;
+    text-align: left;
+    color: #aab2d5;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.explanation strong {
+    color: white;
+}
+
+.feature-analysis {
+    margin-top: 20px;
+    padding: 20px;
+    background: #11172a;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.analysis-title {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.analysis-item {
+    background: #151b30;
+    padding: 12px;
+    border-radius: 8px;
+    color: #8992b5;
+    font-size: 13px;
+}
+
+.analysis-item strong {
+    display: block;
+    color: white;
+    margin-top: 5px;
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #272e48;
+    color: #aab2d5;
+}
+
+.detail strong {
+    color: white;
+}
+
+.back {
+    margin-top: 25px;
+    padding: 13px 25px;
+}
+
+@media(max-width:600px) {
+    .app {
+        padding: 22px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .input-area {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    button {
+        padding: 15px;
+    }
+
+    .features {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="nav">
+        <div class="logo">🛡️ <span>PHISH</span>GUARD</div>
+        <div class="badge">CLOUD ML SECURITY</div>
+    </div>
+
+    <!-- HOME SCREEN -->
+    <div id="home">
+
+        <div class="hero">
+
+            <div class="icon">🛡️</div>
+
+            <h1>Phishing URL Detector</h1>
+
+            <p class="subtitle">
+                Analyze a website URL using machine learning
+                and identify potentially dangerous websites.
+            </p>
+
+            <div class="input-area">
+                <input id="urlInput"
+                       type="text"
+                       placeholder="https://example.com">
+                <button onclick="analyze()">Analyze URL</button>
+            </div>
+
+            <div class="features">
+                <div class="feature">✓ URL Analysis</div>
+                <div class="feature">✓ ML Detection</div>
+                <div class="feature">✓ Risk Assessment</div>
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- Result Screen-->
+<div id="result">
+
+    <div class="result-card">
+
+        <div id="resultIcon" class="result-icon">⚠️</div>
+
+        <div id="resultTitle" class="result-title">PHISHING</div>
+
+        <div id="riskBadge" class="risk">HIGH RISK</div>
+
+        <p id="checkedUrl"></p>
+
+        <div class="details">
+
+            <div class="detail">
+                <span>Classification</span>
+                <strong id="classification">Phishing</strong>
+            </div>
+
+            <div class="detail">
+                <span>Risk Level</span>
+                <strong id="riskLevel">High</strong>
+            </div>
+
+            <div class="detail">
+                <span>ML Confidence</span>
+                <strong id="confidence">100%</strong>
+            </div>
+
+        </div>
+
+        <div id="explanation" class="explanation"></div>
+        <div id="featureAnalysis" class="feature-analysis">
+
+    <div class="analysis-title">Security Analysis</div>
+
+    <div class="analysis-grid">
+
+        <div class="analysis-item">
+            <span>URL Length</span>
+            <strong id="urlLength">-</strong>
+        </div>
+
+        <div class="analysis-item">
+            <span>HTTPS</span>
+            <strong id="httpsStatus">-</strong>
+        </div>
+
+        <div class="analysis-item">
+            <span>Subdomains</span>
+            <strong id="subdomains">-</strong>
+        </div>
+
+        <div class="analysis-item">
+            <span>Suspicious Keywords</span>
+            <strong id="suspiciousWords">-</strong>
+        </div>
+
+        <div class="analysis-item">
+            <span>IP Address</span>
+            <strong id="ipAddress">-</strong>
+        </div>
+
+        <div class="analysis-item">
+            <span>@ Symbol</span>
+            <strong id="atSymbol">-</strong>
+        </div>
+
+    </div>
+
+</div>
+
+        <button class="back" onclick="goBack()">
+            Analyze Another URL
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+async function analyze() {
+
+    let url = document.getElementById("urlInput").value;
+
+    if (url.trim() === "") {
+        alert("Please enter a URL.");
+        return;
+    }
+
+    document.getElementById("home").style.display = "none";
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("checkedUrl").innerText =
+        "Analyzing: " + url;
+
+    try {
+
+        const response = await fetch(
+            "https://phishguard-t0n4.onrender.com/predict",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    url: url
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+        document.getElementById("checkedUrl").innerText =
+            "Analyzed: " + data.url;
+
+        document.getElementById("resultIcon").innerText =
+            data.classification === "Phishing" ? "⚠️" : "✓";
+
+const resultCard = document.querySelector(".result-card");
+
+resultCard.classList.remove("safe", "danger", "warning");
+
+if (data.risk_level === "High") {
+    resultCard.classList.add("danger");
+} 
+else if (data.risk_level === "Medium") {
+    resultCard.classList.add("warning");
+} 
+else {
+    resultCard.classList.add("safe");
+}
+        document.getElementById("resultTitle").innerText =
+            data.classification.toUpperCase();
+
+        document.getElementById("riskBadge").innerText =
+            data.risk_level.toUpperCase() + " RISK";
+
+        document.getElementById("classification").innerText =
+            data.classification;
+
+        document.getElementById("riskLevel").innerText =
+            data.risk_level;
+
+        document.getElementById("confidence").innerText =
+            data.confidence + "%";
+        let reasons = [];
+
+if (data.features.suspicious_words > 0) {
+    reasons.push(
+        data.features.suspicious_words +
+        " suspicious keyword(s) detected"
+    );
+}
+
+if (data.features.ip_address === 1) {
+    reasons.push("The URL uses an IP address instead of a domain name");
+}
+
+if (data.features.at_symbol === 1) {
+    reasons.push("The URL contains an @ symbol");
+}
+
+if (data.features.https === 0) {
+    reasons.push("The URL does not use HTTPS");
+}
+
+if (data.features.subdomains > 1) {
+    reasons.push("The URL contains multiple subdomains");
+}
+
+if (reasons.length === 0) {
+    reasons.push("No major suspicious URL features were detected");
+}
+
+document.getElementById("explanation").innerHTML =
+    "<strong>Why this result?</strong><br>• " +
+    reasons.join("<br>• ");
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Unable to connect to the PhishGuard server.");
+
+        goBack();
+    }
+}
+
+function goBack() {
+
+    document.getElementById("result").style.display = "none";
+    document.getElementById("home").style.display = "block";
+
+    document.getElementById("urlInput").value = "";
+
+}
+</script>
+
+</body>
+</html>
