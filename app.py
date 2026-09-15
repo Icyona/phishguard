@@ -88,12 +88,19 @@ def predict():
 
     confidence = round(float(max(probabilities)) * 100, 2)
 
-    if prediction == 1:
-        classification = "Phishing"
-        risk_level = "High"
-    else:
-        classification = "Legitimate"
-        risk_level = "Low"
+    phishing_probability = float(probabilities[1])
+
+if phishing_probability >= 0.75:
+    classification = "Phishing"
+    risk_level = "High"
+
+elif phishing_probability >= 0.40:
+    classification = "Suspicious"
+    risk_level = "Medium"
+
+else:
+    classification = "Legitimate"
+    risk_level = "Low"
 
     return jsonify({
         "url": url,
