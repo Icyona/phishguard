@@ -6,7 +6,11 @@ import re
 from urllib.parse import urlparse
 
 app = Flask(__name__)
-CORS(app)
+
+# Allow the frontend to communicate with the API
+CORS(app, resources={
+    r"/predict": {"origins": "*"}
+})
 
 # Load trained model
 model = joblib.load("phishing_model.pkl")
@@ -89,17 +93,17 @@ def predict():
 
     phishing_probability = float(probabilities[1])
 
-if phishing_probability >= 0.75:
-    classification = "Phishing"
-    risk_level = "High"
+    if phishing_probability >= 0.75:
+        classification = "Phishing"
+        risk_level = "High"
 
-elif phishing_probability >= 0.40:
-    classification = "Suspicious"
-    risk_level = "Medium"
+    elif phishing_probability >= 0.40:
+        classification = "Suspicious"
+        risk_level = "Medium"
 
-else:
-    classification = "Legitimate"
-    risk_level = "Low"
+    else:
+        classification = "Legitimate"
+        risk_level = "Low"
 
     return jsonify({
         "url": url,
